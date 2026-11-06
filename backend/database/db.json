@@ -1,0 +1,134 @@
+{
+  "students": [
+    {
+      "id": "student-101",
+      "rollNo": "101",
+      "name": "Rahul Sharma",
+      "course": "CSE",
+      "year": "2026",
+      "email": "rahul@example.com"
+    },
+    {
+      "id": "student-102",
+      "rollNo": "102",
+      "name": "Priya Reddy",
+      "course": "CSE",
+      "year": "2026",
+      "email": "priya@example.com"
+    },
+    {
+      "id": "student-103",
+      "rollNo": "103",
+      "name": "Arjun Kumar",
+      "course": "CSE",
+      "year": "2026",
+      "email": "arjun@example.com"
+    },
+    {
+      "id": "student-104",
+      "rollNo": "104",
+      "name": "Sneha Rao",
+      "course": "CSE",
+      "year": "2026",
+      "email": "sneha@example.com"
+    },
+    {
+      "id": "student-105",
+      "rollNo": "105",
+      "name": "Kiran Kumar",
+      "course": "CSE",
+      "year": "2026",
+      "email": "kiran@example.com"
+    },
+    {
+      "id": "39a04d7e-11eb-4028-bab1-253e9e55eaf9",
+      "rollNo": "108",
+      "name": "Akoju Vinay",
+      "course": "AIML",
+      "year": "2026",
+      "email": "akojuvinay@gmail.com",
+      "createdAt": "2026-11-06T08:00:15.140Z"
+    }
+  ],
+  "attendance": [
+    {
+      "date": "2026-11-06",
+      "students": [
+        {
+          "studentId": "student-101",
+          "periods": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "studentId": "student-102",
+          "periods": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "studentId": "student-103",
+          "periods": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "studentId": "student-104",
+          "periods": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "studentId": "student-105",
+          "periods": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "studentId": "39a04d7e-11eb-4028-bab1-253e9e55eaf9",
+          "periods": [
+            "P",
+            "P",
+            "P",
+            "P",
+            "P",
+            "P",
+            "P"
+          ]
+        }
+      ],
+      "createdAt": "2026-11-06T08:03:19.300Z",
+      "updatedAt": "2026-11-06T08:05:41.149Z"
+    }
+  ]
+}

@@ -1,0 +1,708 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f6f8fc">
+    <title>Attendify | Student Attendance Management</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">
+                <i data-lucide="graduation-cap"></i>
+            </div>
+
+            <div>
+                <h2>Attendify</h2>
+                <span>SMART CAMPUS</span>
+            </div>
+        </div>
+
+        <div class="menu-label">MAIN MENU</div>
+
+        <nav class="navigation">
+
+            <button class="nav-link active" data-page="dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </button>
+
+            <button class="nav-link" data-page="attendance">
+                <i data-lucide="clipboard-check"></i>
+                <span>Attendance</span>
+            </button>
+
+            <button class="nav-link" data-page="students">
+                <i data-lucide="users"></i>
+                <span>Students</span>
+            </button>
+
+            <button class="nav-link" data-page="reports">
+                <i data-lucide="chart-no-axes-combined"></i>
+                <span>Reports</span>
+            </button>
+
+            <button class="nav-link" data-page="history">
+                <i data-lucide="history"></i>
+                <span>History</span>
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-card">
+                <i data-lucide="cloud"></i>
+                <h4>Attendify Cloud</h4>
+                <p>Your attendance records are saved securely in the application database.</p>
+                <span class="connection-indicator">
+                    <span class="live-dot"></span>
+                    System ready
+                </span>
+            </div>
+
+            <div class="profile">
+                <div class="avatar">A</div>
+
+                <div>
+                    <strong>Administrator</strong>
+                    <small>Admin account</small>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="top-left">
+
+                <button class="icon-button mobile-menu" id="menuToggle">
+                    <i data-lucide="menu"></i>
+                </button>
+
+                <div>
+                    <span class="breadcrumb">Workspace /</span>
+                    <strong id="pageTitle">Dashboard</strong>
+                </div>
+
+            </div>
+
+            <div class="top-right">
+
+                <div class="system-status" id="systemStatus">
+                    <span class="live-dot"></span>
+                    Connecting...
+                </div>
+
+                <button class="icon-button" id="refreshBtn" title="Refresh data">
+                    <i data-lucide="refresh-cw"></i>
+                </button>
+
+                <div class="avatar top-avatar">A</div>
+
+            </div>
+
+        </header>
+
+        <div class="content">
+
+            <!-- DASHBOARD -->
+
+            <section class="page active" id="dashboard">
+
+                <div class="welcome-section">
+
+                    <div>
+                        <span class="eyebrow">OVERVIEW</span>
+
+                        <h1>Good day, Administrator 👋</h1>
+
+                        <p>Here's what's happening with your students today.</p>
+                    </div>
+
+                    <div class="date-display">
+                        <i data-lucide="calendar-days"></i>
+                        <span id="todayDate"></span>
+                    </div>
+
+                </div>
+
+                <!-- STATISTICS -->
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span>Total Students</span>
+                            <div class="stat-icon purple">
+                                <i data-lucide="users"></i>
+                            </div>
+                        </div>
+
+                        <h2 id="totalStudents">0</h2>
+                        <small>Registered students</small>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span>Present Today</span>
+                            <div class="stat-icon green">
+                                <i data-lucide="user-check"></i>
+                            </div>
+                        </div>
+
+                        <h2 id="presentCount">0</h2>
+                        <small>Periods marked present</small>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span>Absent Today</span>
+                            <div class="stat-icon red">
+                                <i data-lucide="user-x"></i>
+                            </div>
+                        </div>
+
+                        <h2 id="absentCount">0</h2>
+                        <small>Periods marked absent</small>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span>Attendance Rate</span>
+                            <div class="stat-icon blue">
+                                <i data-lucide="chart-pie"></i>
+                            </div>
+                        </div>
+
+                        <h2 id="attendancePercentage">0%</h2>
+                        <small>Based on marked periods</small>
+                    </div>
+
+                </div>
+
+                <!-- DASHBOARD CONTENT -->
+
+                <div class="dashboard-grid">
+
+                    <div class="panel attendance-overview">
+
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Attendance Overview</h3>
+                                <p>Today's period-wise attendance</p>
+                            </div>
+
+                            <button class="text-button" data-go="attendance">
+                                View attendance →
+                            </button>
+                        </div>
+
+                        <div class="overview-chart" id="overviewChart">
+
+                            <div class="empty-state">
+                                No attendance data available yet.
+                            </div>
+
+                        </div>
+
+                        <div class="chart-legend">
+                            <span><i class="legend-dot present-dot"></i> Present</span>
+                            <span><i class="legend-dot absent-dot"></i> Absent</span>
+                            <span><i class="legend-dot unmarked-dot"></i> Unmarked</span>
+                        </div>
+
+                    </div>
+
+                    <div class="panel quick-actions">
+
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Quick Actions</h3>
+                                <p>Manage your classroom</p>
+                            </div>
+                        </div>
+
+                        <button class="action-item" data-go="attendance">
+                            <div class="action-icon purple">
+                                <i data-lucide="clipboard-check"></i>
+                            </div>
+
+                            <div>
+                                <strong>Mark Attendance</strong>
+                                <small>Record daily attendance</small>
+                            </div>
+
+                            <i data-lucide="chevron-right"></i>
+                        </button>
+
+                        <button class="action-item" data-go="students">
+                            <div class="action-icon blue">
+                                <i data-lucide="user-plus"></i>
+                            </div>
+
+                            <div>
+                                <strong>Add Student</strong>
+                                <small>Register a new student</small>
+                            </div>
+
+                            <i data-lucide="chevron-right"></i>
+                        </button>
+
+                        <button class="action-item" data-go="reports">
+                            <div class="action-icon green">
+                                <i data-lucide="file-chart-column"></i>
+                            </div>
+
+                            <div>
+                                <strong>View Reports</strong>
+                                <small>Analyze attendance records</small>
+                            </div>
+
+                            <i data-lucide="chevron-right"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- RECENT HISTORY -->
+
+                <div class="panel recent-panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <h3>Recent Attendance</h3>
+                            <p>Latest saved attendance records</p>
+                        </div>
+
+                        <button class="text-button" data-go="history">
+                            View all →
+                        </button>
+
+                    </div>
+
+                    <div class="table-container">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Present</th>
+                                    <th>Absent</th>
+                                    <th>Attendance</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="dashboardHistory">
+                                <tr>
+                                    <td colspan="4" class="empty-cell">
+                                        No records found.
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- ATTENDANCE PAGE -->
+
+            <section class="page" id="attendance">
+
+                <div class="page-heading">
+
+                    <div>
+                        <span class="eyebrow">CLASSROOM MANAGEMENT</span>
+                        <h1>Attendance Management</h1>
+                        <p>Track student attendance across seven periods.</p>
+                    </div>
+
+                </div>
+
+                <div class="panel attendance-panel">
+
+                    <div class="attendance-toolbar">
+
+                        <div class="date-picker-wrapper">
+                            <label for="attendanceDate">Attendance Date</label>
+
+                            <input type="date" id="attendanceDate">
+                        </div>
+
+                        <div class="attendance-actions">
+
+                            <button class="btn btn-outline" id="markAllPresent">
+                                <i data-lucide="check-check"></i>
+                                All Present
+                            </button>
+
+                            <button class="btn btn-outline danger-outline" id="markAllAbsent">
+                                <i data-lucide="x"></i>
+                                All Absent
+                            </button>
+
+                            <button class="btn btn-primary" id="saveAttendance">
+                                <i data-lucide="save"></i>
+                                Save Attendance
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="attendance-summary" id="attendanceSummary">
+                        Select attendance status for each student.
+                    </div>
+
+                    <div class="table-container">
+
+                        <table class="attendance-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Roll No</th>
+                                    <th>Student Name</th>
+                                    <th>P1</th>
+                                    <th>P2</th>
+                                    <th>P3</th>
+                                    <th>P4</th>
+                                    <th>P5</th>
+                                    <th>P6</th>
+                                    <th>P7</th>
+                                    <th>Present</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="attendanceTableBody">
+                                <tr>
+                                    <td colspan="10" class="empty-cell">
+                                        Loading students...
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div class="attendance-instructions">
+                        <span><b class="present-key">P</b> Present</span>
+                        <span><b class="absent-key">A</b> Absent</span>
+                        <span><b class="unmarked-key">-</b> Not marked</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- STUDENTS PAGE -->
+
+            <section class="page" id="students">
+
+                <div class="page-heading">
+
+                    <div>
+                        <span class="eyebrow">STUDENT DIRECTORY</span>
+                        <h1>Student Management</h1>
+                        <p>Add, update and manage student information.</p>
+                    </div>
+
+                    <button class="btn btn-primary" id="showStudentForm">
+                        <i data-lucide="user-plus"></i>
+                        Add Student
+                    </button>
+
+                </div>
+
+                <!-- ADD STUDENT FORM -->
+
+                <div class="panel student-form-panel hidden" id="studentFormPanel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <h3 id="studentFormTitle">Add New Student</h3>
+                            <p>Enter student information below.</p>
+                        </div>
+                    </div>
+
+                    <form id="studentForm">
+
+                        <input type="hidden" id="studentId">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Roll Number *</label>
+                                <input type="text" id="rollNo" placeholder="e.g. 111" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Student Name *</label>
+                                <input type="text" id="studentName" placeholder="Full name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Course</label>
+                                <input type="text" id="studentCourse" value="CSE">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Academic Year</label>
+                                <input type="text" id="studentYear" value="2026">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="studentEmail" placeholder="student@example.com">
+                            </div>
+
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline" id="cancelStudentForm">
+                                Cancel
+                            </button>
+
+                            <button type="submit" class="btn btn-primary" id="studentSubmit">
+                                Save Student
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <!-- STUDENT TABLE -->
+
+                <div class="panel">
+
+                    <div class="panel-heading student-toolbar">
+
+                        <div>
+                            <h3>All Students</h3>
+                            <p id="studentCountLabel">0 registered students</p>
+                        </div>
+
+                        <div class="search-box">
+                            <i data-lucide="search"></i>
+                            <input type="search" id="studentSearch" placeholder="Search students...">
+                        </div>
+
+                    </div>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Roll Number</th>
+                                    <th>Student Name</th>
+                                    <th>Course</th>
+                                    <th>Year</th>
+                                    <th>Email</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="studentsTableBody">
+                                <tr>
+                                    <td colspan="6" class="empty-cell">Loading students...</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- REPORTS PAGE -->
+
+            <section class="page" id="reports">
+
+                <div class="page-heading">
+
+                    <div>
+                        <span class="eyebrow">ANALYTICS</span>
+                        <h1>Attendance Reports</h1>
+                        <p>View student-wise attendance performance.</p>
+                    </div>
+
+                    <div class="report-controls">
+                        <input type="month" id="reportMonth">
+                        <button class="btn btn-primary" id="exportReport">
+                            <i data-lucide="download"></i>
+                            Export CSV
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="stats-grid report-stats">
+
+                    <div class="stat-card">
+                        <span>Total Present Periods</span>
+                        <h2 id="reportPresent">0</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>Total Absent Periods</span>
+                        <h2 id="reportAbsent">0</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>Average Attendance</span>
+                        <h2 id="reportAverage">0%</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>Students Below 75%</span>
+                        <h2 id="reportLow">0</h2>
+                    </div>
+
+                </div>
+
+                <div class="panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Monthly Student Performance</h3>
+                            <p>Based on saved attendance records.</p>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Roll No</th>
+                                    <th>Student Name</th>
+                                    <th>Present</th>
+                                    <th>Absent</th>
+                                    <th>Total</th>
+                                    <th>Percentage</th>
+                                    <th>Performance</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="monthlyReportBody">
+                                <tr>
+                                    <td colspan="7" class="empty-cell">Loading report...</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- HISTORY PAGE -->
+
+            <section class="page" id="history">
+
+                <div class="page-heading">
+                    <div>
+                        <span class="eyebrow">RECORD MANAGEMENT</span>
+                        <h1>Attendance History</h1>
+                        <p>Review all previously saved attendance records.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Saved Records</h3>
+                            <p>Attendance records ordered by date.</p>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Present</th>
+                                    <th>Absent</th>
+                                    <th>Total Marked</th>
+                                    <th>Attendance Rate</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="historyTableBody">
+                                <tr>
+                                    <td colspan="5" class="empty-cell">Loading history...</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- FOOTER -->
+
+            <footer class="footer">
+                <span>© 2026 Attendify Student Management System</span>
+                <span>Powered by Node.js & Docker</span>
+            </footer>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- TOAST -->
+
+<div id="toastContainer" class="toast-container"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
